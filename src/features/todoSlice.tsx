@@ -1,11 +1,11 @@
  import { createSlice } from '@reduxjs/toolkit'
  
- const initialState = {
-    todoList: [] as Array<{
-        name: string,
-        done: boolean,
-        id: number
-    }>
+ export interface TodoListState {
+     todoList: {name: string, done: boolean, id: number}[]
+ }
+
+ const initialState: TodoListState = {
+    todoList: [] 
  }
  
  const todoSlice = createSlice({
@@ -18,11 +18,7 @@
        setCheck: (state, action)=> {
         state.todoList.map(item => {
             if (action.payload === item.id) {
-                if (item.done === true) {
-                    item.done = false
-                } else {
-                    item.done = true
-                }
+                item.done = !item.done
             }
         })
        }
@@ -30,8 +26,5 @@
  });
  
  export const {saveTodo, setCheck} = todoSlice.actions
-
-
- export const selectTodoList = (state: any) => state.todos.todoList
  
  export default todoSlice.reducer
