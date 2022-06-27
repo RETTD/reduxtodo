@@ -2,12 +2,13 @@ import React, { useState } from "react"
 import './input.css'
 import { useDispatch } from "react-redux"
 import { saveTodo } from "../features/todoSlice"
+import { lastReturnedAction } from "./dataFetch"
 
 const Input = () => {
     const [inputValue, setInput] = useState('')
     const [error, setError] = useState(false)
     const dispatch = useDispatch()
-
+    console.log(lastReturnedAction)
     const addTodo = () => {
         if (inputValue.length !== 0) {
             dispatch(saveTodo({
